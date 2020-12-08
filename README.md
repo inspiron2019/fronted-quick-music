@@ -32,4 +32,5 @@
 
 ## 参考文档
 
-- [上传本地项目到github](https://www.cnblogs.com/smfx1314/p/8426115.html)
+- [如何上传本地项目到github](https://www.cnblogs.com/smfx1314/p/8426115.html)
+- [如何使用iconfont](https://www.cnblogs.com/chenmz1995/p/11373104.html)
