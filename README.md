@@ -31,6 +31,31 @@
 - 如何解决diff
 - 如何本地创建分支上传云端[git push origin dev:dev]
 
+## $nextTick 在下次DOM更新结束之后，执行延迟回调
+
+- 比如获取tree树节点展开的后的子节点个数
+- 关于table的多表头与拖拽表头的冲突
+- 层级较深对象的修改，$set的使用规范
+- 关于树结构，:key的使用规范
+- $refs
+- vuex
+- slot
+- render
+- active
+- router
+- watch
+- computed
+- 多页面应用
+
+## 智能访客运营系统总结
+
+- 利用render自定义Tree组件的节点内容，借助$nextTick在节点展开时判断节点横向纵向展示
+- 利用render自定义多表头、拖拽，单击下拉菜单，双击修改标题内容
+- 封装百度地图组件
+- 封装搜索展示列表组件
+- 解决iview退出登录时tagNav没有清除，无法根据权限控制菜单
+
+
 ## 参考文档
 
 - [如何上传本地项目到github](https://www.cnblogs.com/smfx1314/p/8426115.html)
