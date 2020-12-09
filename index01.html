@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01绘制图片</title>
+    <link type="text/css" rel="styleSheet"  href="./index.css" />
+</head>
+<body>
+    <canvas id="ctx" width="600" height="400"></canvas>
+    <script>
+        // const imgHref = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607507300013&di=cd72f282d48030fe0ceb546f26b03641&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F25%2F15%2F16pic_2515280_b.jpg'
+        // const cvs = document.querySelector('#ctx')
+        // const ctx = cvs.getContext('2d')
+
+        // 1、图片加载方式
+        // 第一种：
+        // let img = document.createElement('img')
+        // img.src = imgHref
+
+        // 第二种：
+        // let image = new Image()
+        // image.onload = () => {
+        //     // 拿到宽高
+        //     console.log(image);
+        // }
+        // image.src = imgHref
+
+        // 2、图片绘制
+        // let image = new Image()
+        // image.onload = () => {
+        //     // ctx.drawImage(image, 50, 50)// 第一种：三个参数 obj 画布坐标
+        //     // ctx.drawImage(image, 50, 50, 100, 100) //第二种：五个参数 obj 画布坐标  画布大小
+        //     // ctx.drawImage(image, 10, 10, 200, 200, 100, 50, 100, 100) //第三种：九个参数 obj 图片上的坐标  图片上截取的大小 画布上的坐标 画布上的大小
+        // }
+        // image.src = imgHref
+
+        // 3、帧动画：某一段时间内多张画面来回切换
+        // let image = new Image()
+        // image.onload = () => {
+        //     let w = image.width
+        //     let h = image.height
+
+        //     let positionW = w / 3
+        //     let positionH = h / 3
+
+        //     // 位截取
+        //     let index = 0
+
+        //     let x0 = ctx.canvas.width/2 - positionW/2
+        //     let y0 = ctx.canvas.height/2 - positionH/2
+
+        //     // ctx.drawImage(image, 0, 0, positionW, positionH, x0, y0, positionW, positionH)
+        //     setInterval(() => {
+        //         index++
+        //         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+        //         ctx.drawImage(image, index * positionW, 0, positionW, positionH, x0, y0, positionW, positionH)
+        //         if(index >= 3) index = 0
+        //     }, 1000)
+
+        // }
+        // image.src = imgHref
+
+        // 终极版：行走的小人
+        let Person = function(ctx) {
+            this.ctx = ctx || document.querySelector('#ctx').getContext('2d')
+            this.imgHref = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607507300013&di=cd72f282d48030fe0ceb546f26b03641&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F25%2F15%2F16pic_2515280_b.jpg'
+            // 2图片大小 位图大小 坐标点
+            this.canvasW = this.ctx.canvas.width
+            this.canvasH = this.ctx.canvas.height
+            
+            // 3行走的核心，改变中心点坐标x0 y0 和 图片位图行数
+            this.stepSize = 10 // 步伐大小
+            this.direction = 0 // 0 1 2 3和图片y有关行走方向
+            this.index = 0 // 索引 0 1 2和图片x有关行走方向
+            this.stepX = 0 //偏移量
+            this.stepY = 0
+            
+            
+            this.init()
+        }
+        Person.prototype.init = function() {
+            let self = this
+            // *1、加载图片
+            this.loadImg(function(image) {
+
+                self.imageW = image.width
+                self.imageH = image.height
+
+                self.personW = image.width / 3
+                self.personH = image.height / 3
+
+                self.x0 = (self.canvasW - self.personW) / 2
+                self.y0 = (self.canvasH - self.personH) / 2
+                // **2、默认绘制在中心点
+                self.ctx.drawImage(image, 0, 0, self.personW, self.personH, self.x0, self.y0, self.personW, self.personH)
+                // ***3、方向键控制行走
+                document.onkeyup = function(e) {
+                    
+                    if(e.keyCode === 38) {
+                        // 前
+                        self.direction = 0
+                        self.stepY--
+                        self.drawImg(image)
+                    } else if(e.keyCode === 37) {
+                        // 左
+                        self.direction = 1
+                        self.stepX--
+                        self.drawImg(image)
+                    } else if(e.keyCode === 39) {
+                        // 右
+                        self.direction = 2
+                        self.stepX++
+                        self.drawImg(image)
+                    } else if(e.keyCode === 40) {
+                        // 后
+                        self.direction = 3
+                        self.stepY++
+                        self.drawImg(image)
+                    }
+                }
+            })
+            
+        }
+        Person.prototype.loadImg = function(callback) {
+            let image = new Image()
+            image.onload = function() {
+                callback && callback(image)
+            }
+            image.src = this.imgHref
+        }
+        Person.prototype.drawImg = function(image) {
+            let self = this
+            self.index++
+            self.ctx.clearRect(0, 0, self.canvasW, self.canvasH)
+            self.ctx.drawImage(
+                image, 
+                self.index * self.personW, self.direction * self.personH, 
+                self.personW, self.personH, 
+                self.x0 + self.stepX * self.stepSize, self.y0 + self.stepY * self.stepSize, 
+                self.personW, self.personH)
+            if(self.index >= 2) self.index = 0
+        }
+        new Person()
+
+    </script>
+</body>
+</html>
