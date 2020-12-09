@@ -27,8 +27,9 @@
 前端---服务器端---后端
 
 ## git操作
-
-- 本地创建分支上传云端(git push origin dev:dev)
+- 如何添加忽略文件
+- 如何解决diff
+- 如何本地创建分支上传云端[git push origin dev:dev]
 
 ## 参考文档
 

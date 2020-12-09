@@ -1,5 +1,5 @@
 /**app.wxss**/
-@import './iconfont1.0/iconfont.wxss';
+/* @import './iconfont1.0/iconfont.wxss'; */
 
 .container {
   display: flex;

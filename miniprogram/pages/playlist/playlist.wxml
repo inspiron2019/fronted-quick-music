@@ -1,2 +1,5 @@
 <!--pages/playlist/playlist.wxml-->
-<text>pages/playlist/playlist.wxml</text>
+<view>
+    <button bindtap="role1Taped">role1</button>
+    <button bindtap="role2Taped">role2</button>
+</view>

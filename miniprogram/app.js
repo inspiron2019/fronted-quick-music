@@ -15,5 +15,69 @@ App({
     }
 
     this.globalData = {}
+  },
+  switchTabWithRole: function(role){
+    if(role == 1){
+      this.globalData.tabList =[
+        {
+          "pagePath": "pages/playlist/playlist",
+          "iconPath": "images/logo.png",
+          "selectedIconPath": "images/logo-blue.png",
+          "text": "音乐1"
+        },
+        {
+          "pagePath": "pages/blog/blog",
+          "iconPath": "images/file-add.png",
+          "selectedIconPath": "images/file-add-active.png",
+          "text": "博客2"
+        },
+        {
+          "pagePath": "pages/profile/profile",
+          "iconPath": "images/user.png",
+          "selectedIconPath": "images/user-active.png",
+          "text": "我的3"
+        }
+      ]
+      if (this.changeTabbarCallback) {
+        this.changeTabbarCallback(this.globalData.tabList)
+      }
+      wx.switchTab({
+       url: '/pages/playlist/playlist',
+      })
+    }
+
+    if(role == 2){
+      this.globalData.tabList =[
+        {
+          "pagePath": "pages/playlist/playlist",
+          "iconPath": "images/logo.png",
+          "selectedIconPath": "images/logo-blue.png",
+          "text": "音乐2"
+        },
+        {
+          "pagePath": "pages/blog/blog",
+          "iconPath": "images/file-add.png",
+          "selectedIconPath": "images/file-add-active.png",
+          "text": "博客2"
+        },
+        {
+          "pagePath": "pages/profile/profile",
+          "iconPath": "images/user.png",
+          "selectedIconPath": "images/user-active.png",
+          "text": "我的2"
+        }
+      ]
+      if (this.changeTabbarCallback) {
+        this.changeTabbarCallback(this.globalData.tabList)
+      }
+      wx.switchTab({
+       url: '/pages/profile/profile',
+      })
+
+    }
+  },
+  globalData: {
+    userInfo: null,
+    tabList: []
   }
 })
