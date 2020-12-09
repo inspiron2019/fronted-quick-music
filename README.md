@@ -59,4 +59,5 @@
 ## 参考文档
 
 - [如何上传本地项目到github](https://www.cnblogs.com/smfx1314/p/8426115.html)
+- [如何关联某个分支](https://blog.csdn.net/u010059669/article/details/82670484?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control)
 - [如何使用iconfont](https://www.cnblogs.com/chenmz1995/p/11373104.html)
